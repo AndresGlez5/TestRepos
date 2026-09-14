@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Sign in to your private Audio Downloader." />
+    <title>Sign in · Audio Downloader</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/login.js" defer></script>
+  </head>
+  <body class="login-page">
+    <div class="ambient ambient-one" aria-hidden="true"></div>
+    <div class="ambient ambient-two" aria-hidden="true"></div>
+    <main class="login-main">
+      <section class="login-card" aria-labelledby="login-title">
+        <span class="brand-mark login-mark" aria-hidden="true">
+          <span></span><span></span><span></span><span></span>
+        </span>
+        <div class="eyebrow">PRIVATE AUDIO LIBRARY</div>
+        <h1 id="login-title">Welcome back.</h1>
+        <p>Your download queue is protected. Enter its password to continue.</p>
+        <form id="login-form" novalidate>
+          <label for="password">Password</label>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            autocomplete="current-password"
+            required
+            autofocus
+          />
+          <button class="primary-button login-button" id="login-button" type="submit">
+            <span>Open downloader</span>
+            <span class="button-arrow" aria-hidden="true">↘</span>
+          </button>
+          <p class="form-error" id="login-error" role="alert" hidden></p>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>
