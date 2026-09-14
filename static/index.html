@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="A private, self-hosted Spotify and YouTube audio download queue."
+    />
+    <title>Audio Downloader</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <div class="ambient ambient-one" aria-hidden="true"></div>
+    <div class="ambient ambient-two" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Audio Downloader home">
+        <span class="brand-mark" aria-hidden="true">
+          <span></span><span></span><span></span><span></span>
+        </span>
+        <span>Audio Downloader</span>
+      </a>
+      <div class="health" id="health" role="status" aria-live="polite">
+        <span class="health-dot"></span>
+        <span>Checking server</span>
+      </div>
+      <button class="logout-button" id="logout-button" type="button">Sign out</button>
+    </header>
+
+    <main>
+      <section class="composer" aria-labelledby="page-title">
+        <div class="eyebrow">PRIVATE DOWNLOAD QUEUE</div>
+        <h1 id="page-title">Turn a link into<br /><span>your audio library.</span></h1>
+        <p class="intro">
+          Paste a Spotify track, album, or playlist—or a YouTube video or playlist.
+          Downloads are converted to MP3 and stay on this machine.
+        </p>
+
+        <form id="download-form" novalidate>
+          <label for="media-url">Spotify or YouTube link</label>
+          <div class="input-shell">
+            <input
+              id="media-url"
+              name="url"
+              type="url"
+              inputmode="url"
+              autocomplete="off"
+              spellcheck="false"
+              placeholder="https://www.youtube.com/playlist?list=…"
+              required
+            />
+            <span class="source-badge" id="source-badge" hidden></span>
+          </div>
+          <div class="form-row">
+            <div class="quality-field">
+              <label for="quality">MP3 quality</label>
+              <select id="quality" name="quality">
+                <option value="320">320 kbps · Largest</option>
+                <option value="256">256 kbps · Large</option>
+                <option value="192" selected>192 kbps · Recommended</option>
+                <option value="128">128 kbps · Compact</option>
+              </select>
+            </div>
+            <button class="primary-button" id="submit-button" type="submit">
+              <span>Add to queue</span>
+              <span class="button-arrow" aria-hidden="true">↘</span>
+            </button>
+          </div>
+          <p class="form-error" id="form-error" role="alert" hidden></p>
+        </form>
+
+        <p class="legal-note">
+          Download only media you own or are authorized to save. Source-service terms still apply.
+        </p>
+      </section>
+
+      <section class="queue-panel" aria-labelledby="queue-title">
+        <div class="panel-heading">
+          <div>
+            <div class="eyebrow">ACTIVITY</div>
+            <h2 id="queue-title">Download queue</h2>
+          </div>
+          <span class="queue-count" id="queue-count">0 jobs</span>
+        </div>
+
+        <div class="empty-state" id="empty-state">
+          <div class="empty-wave" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <h3>Quiet for now</h3>
+          <p>Your next download will appear here with live progress and ready-to-save files.</p>
+        </div>
+
+        <div class="job-list" id="job-list" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <template id="job-template">
+      <article class="job-card">
+        <div class="job-main">
+          <div class="source-icon" aria-hidden="true"></div>
+          <div class="job-copy">
+            <div class="job-topline">
+              <span class="job-source"></span>
+              <span class="job-status"></span>
+            </div>
+            <p class="job-url"></p>
+            <p class="job-message"></p>
+          </div>
+          <span class="job-quality"></span>
+        </div>
+        <progress class="job-progress" max="100" value="0"></progress>
+        <div class="job-actions"></div>
+        <details class="job-details">
+          <summary>Job log</summary>
+          <pre class="job-log"></pre>
+        </details>
+      </article>
+    </template>
+  </body>
+</html>
