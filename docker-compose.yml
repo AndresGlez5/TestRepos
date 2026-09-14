@@ -1,0 +1,21 @@
+services:
+  audio-downloader:
+    build: .
+    container_name: audio-downloader
+    restart: unless-stopped
+    environment:
+      AUDIO_BIND: ${AUDIO_BIND:-0.0.0.0}
+      AUDIO_PORT: ${AUDIO_PORT:-8000}
+      AUDIO_DOWNLOAD_ROOT: /app/downloads
+      AUDIO_STATE_ROOT: /app/data
+      AUDIO_ARCHIVE_ROOT: /app/archives
+      AUDIO_PASSWORD: ${AUDIO_PASSWORD:-}
+      AUDIO_SECURE_COOKIES: ${AUDIO_SECURE_COOKIES:-0}
+      SPOTIPY_CLIENT_ID: ${SPOTIPY_CLIENT_ID:-}
+      SPOTIPY_CLIENT_SECRET: ${SPOTIPY_CLIENT_SECRET:-}
+    ports:
+      - "127.0.0.1:${AUDIO_PORT:-8000}:${AUDIO_PORT:-8000}"
+    volumes:
+      - ./downloads:/app/downloads
+      - ./data:/app/data
+      - ./archives:/app/archives
